@@ -3,468 +3,740 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scheda & Dieta - Locoselli</title>
+  <title>Locoselli Training</title>
+
+  <link rel="icon" type="image/png" href="logo.PNG" />
+  <link rel="apple-touch-icon" href="logo-apple.png" />
+  <meta name="theme-color" content="#0f1115" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
   <style>
     :root{
       --bg:#0f1115;
-      --card:#181c22;
-      --card2:#20262e;
-      --text:#f3f4f6;
-      --muted:#b7bec8;
-      --gold:#c8a96b;
-      --line:#2d3440;
-      --ok:#2d7d46;
-      --danger:#8f3d3d;
-      --input:#10151b;
+      --card:#171a21;
+      --card2:#1d2230;
+      --line:#2a3040;
+      --text:#f5f7fb;
+      --muted:#aeb7c9;
+      --gold:#d6b25e;
+      --gold2:#f1d58b;
+      --ok:#78d08b;
+      --danger:#ff8c8c;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:linear-gradient(180deg,#0b0d11,#151923 40%,#0f1115);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Arial,sans-serif;
+      background:linear-gradient(180deg,#0c0e13,#11151d 40%,#0f1115);
       color:var(--text);
     }
-    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 40px}
+    .wrap{
+      max-width:860px;
+      margin:0 auto;
+      padding:18px 14px 40px;
+    }
     .hero{
-      padding:18px;border:1px solid var(--line);border-radius:22px;
-      background:linear-gradient(145deg,rgba(200,169,107,.14),rgba(255,255,255,.02));
-      box-shadow:0 12px 40px rgba(0,0,0,.25);
-    }
-    h1,h2,h3{margin:0 0 10px}
-    h1{font-size:28px;letter-spacing:.4px}
-    h2{font-size:20px;color:var(--gold);margin-top:8px}
-    h3{font-size:16px;color:var(--gold)}
-    p{margin:8px 0;line-height:1.45}
-    .muted{color:var(--muted)}
-    .grid{display:grid;gap:14px;margin-top:14px}
-    .grid.two{grid-template-columns:1.2fr .8fr}
-    @media (max-width: 860px){.grid.two{grid-template-columns:1fr}}
-    .card{
-      background:rgba(24,28,34,.96);
+      background:linear-gradient(135deg,#171b23,#0f1115 60%,#1f2530);
       border:1px solid var(--line);
-      border-radius:20px;
+      border-radius:24px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      margin-bottom:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:10px;
+    }
+    .brand img{
+      width:66px;
+      height:66px;
+      object-fit:contain;
+      border-radius:18px;
+      background:#11161f;
+      padding:8px;
+      border:1px solid var(--line);
+    }
+    h1{
+      margin:0;
+      font-size:28px;
+      line-height:1.1;
+    }
+    .sub{
+      color:var(--muted);
+      margin-top:6px;
+      font-size:14px;
+      line-height:1.45;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .nav-btn{
+      appearance:none;
+      border:none;
+      border-radius:16px;
+      padding:14px 12px;
+      font-size:16px;
+      font-weight:800;
+      color:#111;
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      box-shadow:0 8px 18px rgba(214,178,94,.18);
+    }
+    .section{
+      display:none;
+      background:rgba(23,26,33,.95);
+      border:1px solid var(--line);
+      border-radius:22px;
       padding:16px;
+      margin-top:14px;
     }
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#262d38;color:var(--gold);font-size:12px;margin:4px 6px 0 0;border:1px solid #3b4554}
-    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-    .tab{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer}
-    .tab.active{background:rgba(200,169,107,.12);color:var(--gold);border-color:rgba(200,169,107,.4)}
-    .day{display:none}
-    .day.active{display:block}
-    .exercise{padding:12px;border:1px solid var(--line);border-radius:16px;background:#161b21;margin-bottom:12px}
-    .exercise-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
-    .exercise small{color:var(--muted)}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    th,td{padding:8px 6px;border-bottom:1px solid #29303a;text-align:left;vertical-align:middle}
-    th{color:var(--muted);font-weight:600}
-    input, textarea, select{
-      width:100%;padding:10px 11px;border-radius:10px;border:1px solid #323a46;
-      background:var(--input);color:var(--text);outline:none;
+    .section.active{display:block}
+    .title{
+      margin:0 0 4px;
+      font-size:22px;
     }
-    input[type="checkbox"]{width:auto;transform:scale(1.1)}
-    textarea{min-height:90px;resize:vertical}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    button{
-      padding:11px 14px;border-radius:12px;border:1px solid var(--line);
-      background:var(--card2);color:var(--text);cursor:pointer;font-weight:600;
+    .desc{
+      color:var(--muted);
+      margin:0 0 14px;
+      font-size:14px;
+      line-height:1.45;
     }
-    button.primary{background:rgba(200,169,107,.14);color:var(--gold);border-color:rgba(200,169,107,.4)}
-    button.good{background:rgba(45,125,70,.18);border-color:rgba(45,125,70,.4)}
-    button.warn{background:rgba(143,61,61,.16);border-color:rgba(143,61,61,.4)}
-    .note{
-      border-left:4px solid var(--gold);padding:10px 12px;background:rgba(200,169,107,.08);
-      border-radius:10px;margin-top:10px;color:#f6e9d1
+    .exercise{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:12px;
     }
-    .meal{padding:12px;border:1px solid var(--line);border-radius:16px;background:#161b21;margin-bottom:12px}
-    .history-item{padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:#151a20}
-    .small{font-size:12px}
+    .exercise h3{
+      margin:0 0 6px;
+      font-size:18px;
+    }
+    .meta{
+      color:var(--gold2);
+      font-size:13px;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+    .series{
+      display:grid;
+      grid-template-columns:72px 72px 1fr 42px;
+      gap:8px;
+      align-items:center;
+      margin-bottom:8px;
+    }
+    .series label{
+      color:var(--muted);
+      font-size:12px;
+    }
+    input[type="number"], input[type="text"], textarea, select{
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#0f131a;
+      color:var(--text);
+      padding:10px 10px;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{
+      min-height:80px;
+      resize:vertical;
+    }
+    .check{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#0f131a;
+      height:42px;
+    }
+    input[type="checkbox"]{
+      width:18px;height:18px;
+      accent-color:var(--gold);
+    }
+    .top-actions, .bottom-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .small-btn{
+      appearance:none;
+      border:1px solid var(--line);
+      background:#121722;
+      color:var(--text);
+      border-radius:14px;
+      padding:11px 13px;
+      font-weight:700;
+      font-size:14px;
+    }
+    .small-btn.gold{
+      background:linear-gradient(180deg,var(--gold2),var(--gold));
+      color:#111;
+      border:none;
+    }
+    .small-btn.red{
+      color:#ffd0d0;
+      border-color:#5a2e2e;
+      background:#231517;
+    }
+    .diet-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border-radius:18px;
+      padding:14px;
+      margin-bottom:12px;
+      text-align:left;
+    }
+    .diet-card h3{
+      margin:0 0 8px;
+      color:var(--gold2);
+    }
+    .notice{
+      border-left:4px solid var(--gold);
+      background:#151a22;
+      padding:12px 12px;
+      border-radius:12px;
+      color:var(--text);
+      margin-bottom:12px;
+      line-height:1.45;
+    }
+    .muted{color:var(--muted)}
+    .history-item{
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      margin-bottom:10px;
+      background:#121722;
+    }
+    .history-item strong{color:var(--gold2)}
+    canvas{
+      width:100%;
+      max-width:100%;
+      background:#121722;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:10px;
+    }
+    .footer-note{
+      margin-top:18px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
+    }
+    @media (max-width:700px){
+      .grid{grid-template-columns:1fr 1fr}
+      .series{grid-template-columns:1fr 1fr 1.2fr 42px}
+      h1{font-size:24px}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="hero">
-      <h1>Scheda & Dieta Personalizzata</h1>
-      <p class="muted">Programma pensato per aumentare massa magra in modo pulito, con focus glutei, controllo della ritenzione e gestione dello stress metabolico.</p>
-      <span class="pill">Glutei focus</span>
-      <span class="pill">3 giorni</span>
-      <span class="pill">Salvataggio automatico</span>
-      <span class="pill">Peso + ripetizioni</span>
-    </div>
-
-    <div class="grid two">
-      <div class="card">
-        <h2>Messaggio importante</h2>
-        <div class="note">
-          <strong>Non devi mangiare di meno.</strong> Devi mangiare in modo più intelligente per aiutare tiroide, cortisolo, recupero e ritenzione. Mangiare troppo poco può peggiorare gonfiore, fame, stanchezza e blocco del fisico.
+      <div class="brand">
+        <img src="logo.PNG" alt="Locoselli">
+        <div>
+          <h1>Locoselli Training</h1>
+          <div class="sub">Scheda completa, dieta, storico e grafico progressi. Pronta per iPhone, con salvataggio automatico sul dispositivo.</div>
         </div>
-        <p><strong>Tiroide:</strong> se la terapia non è ancora ben stabile, il corpo può trattenere liquidi e sembrare più "coperto" anche senza vero aumento di grasso.</p>
-        <p><strong>Cortisolo:</strong> troppo stress, troppo cardio, dieta troppo rigida o allenamenti troppo lunghi possono aumentare il cortisolo e peggiorare la ritenzione.</p>
-        <p><strong>Obiettivo:</strong> glutei più pieni, linea femminile più bella, fisico pulito e meno acqua sottocutanea.</p>
       </div>
 
-      <div class="card">
-        <h2>Profilo</h2>
-        <label>Nome</label>
-        <input id="profileName" placeholder="Es. Martina" />
-        <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:10px;">
-          <div>
-            <label>Altezza</label>
-            <input id="profileHeight" placeholder="156 cm" />
-          </div>
-          <div>
-            <label>Peso</label>
-            <input id="profileWeight" placeholder="53 kg" />
-          </div>
-        </div>
-        <label style="margin-top:10px;display:block;">Note</label>
-        <textarea id="profileNotes" placeholder="Tiroide, ritenzione, stress, sensazioni..."></textarea>
+      <div class="grid">
+        <button class="nav-btn" onclick="openSection('day1')">Giorno 1 🍑</button>
+        <button class="nav-btn" onclick="openSection('day2')">Giorno 2 💪</button>
+        <button class="nav-btn" onclick="openSection('day3')">Giorno 3 🍑</button>
+        <button class="nav-btn" onclick="openSection('diet')">Dieta 🥗</button>
+        <button class="nav-btn" onclick="openSection('progress')">Progressi 📈</button>
+        <button class="nav-btn" onclick="openSection('history')">Storico 🗂️</button>
       </div>
     </div>
 
-    <div class="grid two">
-      <div class="card">
-        <h2>Dieta</h2>
-        <div id="dietContainer"></div>
+    <section id="day1" class="section active">
+      <h2 class="title">Giorno 1 — Glutei Forza</h2>
+      <p class="desc">Focus su spinta, tensione meccanica e crescita glutei. Carichi seri, esecuzione pulita.</p>
+
+      <div class="exercise" data-exercise="Hip Thrust">
+        <h3>Hip Thrust</h3>
+        <div class="meta">5 x 8</div>
+        <div class="series"><input type="number" step="0.5" id="d1_hip_p1" placeholder="Peso"><input type="number" id="d1_hip_r1" placeholder="Rep"><input type="text" id="d1_hip_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d1_hip_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_hip_p2" placeholder="Peso"><input type="number" id="d1_hip_r2" placeholder="Rep"><input type="text" id="d1_hip_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d1_hip_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_hip_p3" placeholder="Peso"><input type="number" id="d1_hip_r3" placeholder="Rep"><input type="text" id="d1_hip_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d1_hip_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_hip_p4" placeholder="Peso"><input type="number" id="d1_hip_r4" placeholder="Rep"><input type="text" id="d1_hip_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d1_hip_c4"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_hip_p5" placeholder="Peso"><input type="number" id="d1_hip_r5" placeholder="Rep"><input type="text" id="d1_hip_n5" placeholder="Note serie 5"><div class="check"><input type="checkbox" id="d1_hip_c5"></div></div>
       </div>
 
-      <div class="card">
-        <h2>Supporto & regole</h2>
-        <p><strong>Acqua:</strong> 2.5–3 litri al giorno.</p>
-        <p><strong>Cardio:</strong> 2–3 volte a settimana, 20 minuti di camminata leggera/inclinata.</p>
-        <p><strong>Da limitare:</strong> cibi molto lavorati, eccesso di sale nascosto, tonno in scatola frequente, digiuni lunghi.</p>
-        <p><strong>Focus:</strong> costanza, recupero, sonno, progressione graduale dei carichi.</p>
-        <p><strong>Integratori già usati:</strong> selenio, vitamina D, bromelina, omega 3, magnesio, potassio.</p>
+      <div class="exercise" data-exercise="Squat">
+        <h3>Squat</h3>
+        <div class="meta">4 x 6–8</div>
+        <div class="series"><input type="number" step="0.5" id="d1_sq_p1" placeholder="Peso"><input type="number" id="d1_sq_r1" placeholder="Rep"><input type="text" id="d1_sq_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d1_sq_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_sq_p2" placeholder="Peso"><input type="number" id="d1_sq_r2" placeholder="Rep"><input type="text" id="d1_sq_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d1_sq_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_sq_p3" placeholder="Peso"><input type="number" id="d1_sq_r3" placeholder="Rep"><input type="text" id="d1_sq_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d1_sq_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_sq_p4" placeholder="Peso"><input type="number" id="d1_sq_r4" placeholder="Rep"><input type="text" id="d1_sq_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d1_sq_c4"></div></div>
       </div>
-    </div>
 
-    <div class="card" style="margin-top:14px;">
-      <h2>Allenamento</h2>
-      <div class="tabs" id="tabs"></div>
-      <div id="days"></div>
-      <div class="btns">
-        <button class="primary" id="saveBtn">Salva tutto</button>
-        <button class="good" id="completeBtn">Salva allenamento di oggi nello storico</button>
-        <button id="exportBtn">Esporta backup</button>
-        <button id="importBtn">Importa backup</button>
-        <button class="warn" id="resetBtn">Reset dati</button>
-        <input type="file" id="importFile" accept="application/json" style="display:none" />
+      <div class="exercise" data-exercise="Affondi">
+        <h3>Affondi</h3>
+        <div class="meta">3 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d1_af_p1" placeholder="Peso"><input type="number" id="d1_af_r1" placeholder="Rep"><input type="text" id="d1_af_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d1_af_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_af_p2" placeholder="Peso"><input type="number" id="d1_af_r2" placeholder="Rep"><input type="text" id="d1_af_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d1_af_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_af_p3" placeholder="Peso"><input type="number" id="d1_af_r3" placeholder="Rep"><input type="text" id="d1_af_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d1_af_c3"></div></div>
       </div>
-    </div>
 
-    <div class="card" style="margin-top:14px;">
-      <h2>Storico progressioni</h2>
-      <p class="muted small">Ogni volta che finisce l'allenamento puoi salvarlo qui con data, pesi e ripetizioni usate.</p>
-      <div id="history"></div>
-    </div>
+      <div class="exercise" data-exercise="Leg Press">
+        <h3>Leg Press</h3>
+        <div class="meta">3 x 12</div>
+        <div class="series"><input type="number" step="0.5" id="d1_lp_p1" placeholder="Peso"><input type="number" id="d1_lp_r1" placeholder="Rep"><input type="text" id="d1_lp_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d1_lp_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_lp_p2" placeholder="Peso"><input type="number" id="d1_lp_r2" placeholder="Rep"><input type="text" id="d1_lp_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d1_lp_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_lp_p3" placeholder="Peso"><input type="number" id="d1_lp_r3" placeholder="Rep"><input type="text" id="d1_lp_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d1_lp_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Abduzioni">
+        <h3>Abduzioni</h3>
+        <div class="meta">3 x 15 + drop set finale</div>
+        <div class="series"><input type="number" step="0.5" id="d1_ab_p1" placeholder="Peso"><input type="number" id="d1_ab_r1" placeholder="Rep"><input type="text" id="d1_ab_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d1_ab_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_ab_p2" placeholder="Peso"><input type="number" id="d1_ab_r2" placeholder="Rep"><input type="text" id="d1_ab_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d1_ab_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d1_ab_p3" placeholder="Peso"><input type="number" id="d1_ab_r3" placeholder="Rep"><input type="text" id="d1_ab_n3" placeholder="Drop set"><div class="check"><input type="checkbox" id="d1_ab_c3"></div></div>
+      </div>
+
+      <div class="bottom-actions">
+        <button class="small-btn gold" onclick="saveSession('Giorno 1')">Salva sessione Giorno 1</button>
+      </div>
+    </section>
+
+    <section id="day2" class="section">
+      <h2 class="title">Giorno 2 — Upper + Core</h2>
+      <p class="desc">Parte alta completa senza stressare troppo il recupero. Linea femminile pulita e postura migliore.</p>
+
+      <div class="exercise" data-exercise="Lat Machine">
+        <h3>Lat Machine</h3>
+        <div class="meta">4 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d2_lat_p1" placeholder="Peso"><input type="number" id="d2_lat_r1" placeholder="Rep"><input type="text" id="d2_lat_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d2_lat_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_lat_p2" placeholder="Peso"><input type="number" id="d2_lat_r2" placeholder="Rep"><input type="text" id="d2_lat_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d2_lat_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_lat_p3" placeholder="Peso"><input type="number" id="d2_lat_r3" placeholder="Rep"><input type="text" id="d2_lat_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d2_lat_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_lat_p4" placeholder="Peso"><input type="number" id="d2_lat_r4" placeholder="Rep"><input type="text" id="d2_lat_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d2_lat_c4"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Rematore">
+        <h3>Rematore</h3>
+        <div class="meta">3 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d2_re_p1" placeholder="Peso"><input type="number" id="d2_re_r1" placeholder="Rep"><input type="text" id="d2_re_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d2_re_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_re_p2" placeholder="Peso"><input type="number" id="d2_re_r2" placeholder="Rep"><input type="text" id="d2_re_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d2_re_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_re_p3" placeholder="Peso"><input type="number" id="d2_re_r3" placeholder="Rep"><input type="text" id="d2_re_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d2_re_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Chest Press">
+        <h3>Chest Press</h3>
+        <div class="meta">3 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d2_cp_p1" placeholder="Peso"><input type="number" id="d2_cp_r1" placeholder="Rep"><input type="text" id="d2_cp_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d2_cp_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_cp_p2" placeholder="Peso"><input type="number" id="d2_cp_r2" placeholder="Rep"><input type="text" id="d2_cp_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d2_cp_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_cp_p3" placeholder="Peso"><input type="number" id="d2_cp_r3" placeholder="Rep"><input type="text" id="d2_cp_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d2_cp_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Spalle Laterali">
+        <h3>Spalle Laterali</h3>
+        <div class="meta">4 x 15</div>
+        <div class="series"><input type="number" step="0.5" id="d2_sl_p1" placeholder="Peso"><input type="number" id="d2_sl_r1" placeholder="Rep"><input type="text" id="d2_sl_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d2_sl_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_sl_p2" placeholder="Peso"><input type="number" id="d2_sl_r2" placeholder="Rep"><input type="text" id="d2_sl_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d2_sl_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_sl_p3" placeholder="Peso"><input type="number" id="d2_sl_r3" placeholder="Rep"><input type="text" id="d2_sl_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d2_sl_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d2_sl_p4" placeholder="Peso"><input type="number" id="d2_sl_r4" placeholder="Rep"><input type="text" id="d2_sl_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d2_sl_c4"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Addome">
+        <h3>Addome / Core</h3>
+        <div class="meta">10 minuti</div>
+        <textarea id="d2_core_note" placeholder="Scrivi circuito, plank, crunch, sensazioni..."></textarea>
+      </div>
+
+      <div class="bottom-actions">
+        <button class="small-btn gold" onclick="saveSession('Giorno 2')">Salva sessione Giorno 2</button>
+      </div>
+    </section>
+
+    <section id="day3" class="section">
+      <h2 class="title">Giorno 3 — Glutei Pump</h2>
+      <p class="desc">Giornata di pompaggio e forma. Qui vogliamo glutei pieni, controllo e tanto focus muscolare.</p>
+
+      <div class="exercise" data-exercise="Hip Thrust Pump">
+        <h3>Hip Thrust</h3>
+        <div class="meta">4 x 12</div>
+        <div class="series"><input type="number" step="0.5" id="d3_hip_p1" placeholder="Peso"><input type="number" id="d3_hip_r1" placeholder="Rep"><input type="text" id="d3_hip_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d3_hip_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_hip_p2" placeholder="Peso"><input type="number" id="d3_hip_r2" placeholder="Rep"><input type="text" id="d3_hip_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d3_hip_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_hip_p3" placeholder="Peso"><input type="number" id="d3_hip_r3" placeholder="Rep"><input type="text" id="d3_hip_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d3_hip_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_hip_p4" placeholder="Peso"><input type="number" id="d3_hip_r4" placeholder="Rep"><input type="text" id="d3_hip_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d3_hip_c4"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Stacco Rumeno">
+        <h3>Stacco Rumeno</h3>
+        <div class="meta">4 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d3_sr_p1" placeholder="Peso"><input type="number" id="d3_sr_r1" placeholder="Rep"><input type="text" id="d3_sr_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d3_sr_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_sr_p2" placeholder="Peso"><input type="number" id="d3_sr_r2" placeholder="Rep"><input type="text" id="d3_sr_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d3_sr_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_sr_p3" placeholder="Peso"><input type="number" id="d3_sr_r3" placeholder="Rep"><input type="text" id="d3_sr_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d3_sr_c3"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_sr_p4" placeholder="Peso"><input type="number" id="d3_sr_r4" placeholder="Rep"><input type="text" id="d3_sr_n4" placeholder="Note serie 4"><div class="check"><input type="checkbox" id="d3_sr_c4"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Bulgarian Squat">
+        <h3>Bulgarian Squat</h3>
+        <div class="meta">3 x 10</div>
+        <div class="series"><input type="number" step="0.5" id="d3_bs_p1" placeholder="Peso"><input type="number" id="d3_bs_r1" placeholder="Rep"><input type="text" id="d3_bs_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d3_bs_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_bs_p2" placeholder="Peso"><input type="number" id="d3_bs_r2" placeholder="Rep"><input type="text" id="d3_bs_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d3_bs_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_bs_p3" placeholder="Peso"><input type="number" id="d3_bs_r3" placeholder="Rep"><input type="text" id="d3_bs_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d3_bs_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Kickback">
+        <h3>Kickback</h3>
+        <div class="meta">3 x 15</div>
+        <div class="series"><input type="number" step="0.5" id="d3_ki_p1" placeholder="Peso"><input type="number" id="d3_ki_r1" placeholder="Rep"><input type="text" id="d3_ki_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d3_ki_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_ki_p2" placeholder="Peso"><input type="number" id="d3_ki_r2" placeholder="Rep"><input type="text" id="d3_ki_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d3_ki_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_ki_p3" placeholder="Peso"><input type="number" id="d3_ki_r3" placeholder="Rep"><input type="text" id="d3_ki_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d3_ki_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Abduzioni Pump">
+        <h3>Abduzioni</h3>
+        <div class="meta">3 x 20</div>
+        <div class="series"><input type="number" step="0.5" id="d3_ab_p1" placeholder="Peso"><input type="number" id="d3_ab_r1" placeholder="Rep"><input type="text" id="d3_ab_n1" placeholder="Note serie 1"><div class="check"><input type="checkbox" id="d3_ab_c1"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_ab_p2" placeholder="Peso"><input type="number" id="d3_ab_r2" placeholder="Rep"><input type="text" id="d3_ab_n2" placeholder="Note serie 2"><div class="check"><input type="checkbox" id="d3_ab_c2"></div></div>
+        <div class="series"><input type="number" step="0.5" id="d3_ab_p3" placeholder="Peso"><input type="number" id="d3_ab_r3" placeholder="Rep"><input type="text" id="d3_ab_n3" placeholder="Note serie 3"><div class="check"><input type="checkbox" id="d3_ab_c3"></div></div>
+      </div>
+
+      <div class="exercise" data-exercise="Isometria Glutei">
+        <h3>Glute Bridge Isometrico</h3>
+        <div class="meta">3 x 30 secondi</div>
+        <textarea id="d3_iso_note" placeholder="Segna tenuta, bruciore, sensazioni o tempo reale..."></textarea>
+      </div>
+
+      <div class="bottom-actions">
+        <button class="small-btn gold" onclick="saveSession('Giorno 3')">Salva sessione Giorno 3</button>
+      </div>
+    </section>
+
+    <section id="diet" class="section">
+      <h2 class="title">Dieta</h2>
+      <p class="desc">Schema alimentare pulito per sostenere tiroide, recupero, glutei e ridurre la ritenzione.</p>
+
+      <div class="notice"><strong>Importante:</strong> non deve mangiare di meno. Deve mangiare così per aiutare la tiroide, abbassare il cortisolo e ridurre la ritenzione. Mangiare troppo poco peggiora gonfiore, stress e blocco metabolico.</div>
+
+      <div class="diet-card">
+        <h3>Colazione</h3>
+        <div>150 g albume</div>
+        <div>60 g avena</div>
+        <div>10 g burro di mandorle</div>
+      </div>
+
+      <div class="diet-card">
+        <h3>Pranzo</h3>
+        <div>120–130 g pollo, tacchino o pesce</div>
+        <div>80 g riso basmati crudo</div>
+        <div>Verdure</div>
+        <div>10 g olio EVO</div>
+      </div>
+
+      <div class="diet-card">
+        <h3>Spuntino</h3>
+        <div>Yogurt greco oppure yoeggs</div>
+        <div>15 g frutta secca</div>
+      </div>
+
+      <div class="diet-card">
+        <h3>Cena</h3>
+        <div>120 g pesce o carne magra</div>
+        <div>Verdure</div>
+        <div>200 g patate oppure 60 g riso</div>
+        <div>10 g olio EVO</div>
+      </div>
+
+      <div class="diet-card">
+        <h3>Note utili</h3>
+        <div>Acqua: 2,5–3 litri al giorno</div>
+        <div>Cardio: 20 minuti camminata, 2–3 volte settimana</div>
+        <div>Limitare tonno in scatola e cibi lavorati</div>
+        <div>Assunzione tiroide sempre corretta e costante</div>
+      </div>
+    </section>
+
+    <section id="progress" class="section">
+      <h2 class="title">Grafico Progressi</h2>
+      <p class="desc">Seleziona l’esercizio e guarda l’andamento dei pesi salvati nelle sessioni.</p>
+
+      <div class="top-actions">
+        <select id="exerciseSelect" onchange="drawProgress()">
+          <option value="Hip Thrust">Hip Thrust</option>
+          <option value="Squat">Squat</option>
+          <option value="Affondi">Affondi</option>
+          <option value="Leg Press">Leg Press</option>
+          <option value="Abduzioni">Abduzioni</option>
+          <option value="Lat Machine">Lat Machine</option>
+          <option value="Rematore">Rematore</option>
+          <option value="Chest Press">Chest Press</option>
+          <option value="Spalle Laterali">Spalle Laterali</option>
+          <option value="Stacco Rumeno">Stacco Rumeno</option>
+          <option value="Bulgarian Squat">Bulgarian Squat</option>
+          <option value="Kickback">Kickback</option>
+        </select>
+      </div>
+
+      <canvas id="progressChart" width="800" height="360"></canvas>
+      <p class="muted" id="progressText" style="margin-top:10px;">Salva almeno una sessione per vedere il grafico.</p>
+    </section>
+
+    <section id="history" class="section">
+      <h2 class="title">Storico Sessioni</h2>
+      <p class="desc">Ogni volta che salvi una giornata viene registrata qui con data e carichi principali.</p>
+      <div id="historyList"></div>
+
+      <div class="bottom-actions">
+        <button class="small-btn" onclick="exportBackup()">Esporta backup</button>
+        <label class="small-btn" for="importFile" style="display:inline-flex;align-items:center;cursor:pointer;">Importa backup</label>
+        <input id="importFile" type="file" accept=".json" style="display:none" onchange="importBackup(event)">
+        <button class="small-btn red" onclick="resetAllData()">Reset totale</button>
+      </div>
+    </section>
+
+    <div class="footer-note">I dati restano salvati sul dispositivo tramite browser/local storage.</div>
   </div>
 
 <script>
-const appKey = 'locoselli_compagna_app_v1';
+const STORAGE_PREFIX = 'locoselli_compagna_';
+const HISTORY_KEY = STORAGE_PREFIX + 'history';
 
-const dietData = [
-  {
-    title: 'Giorni allenamento',
-    meals: [
-      {name:'Colazione', text:'150 g albume + 60 g avena + 10 g burro di mandorle. Facoltativi frutti rossi.'},
-      {name:'Pranzo', text:'120–130 g pollo / tacchino / pesce + 80 g riso basmati crudo + verdure + 10 g olio EVO.'},
-      {name:'Spuntino', text:'Yogurt greco oppure prodotto a base di albume + 15 g frutta secca.'},
-      {name:'Cena', text:'120 g pesce o carne magra + verdure + 200 g patate oppure 60 g riso + 10 g olio EVO.'}
-    ]
-  },
-  {
-    title: 'Giorni off',
-    meals: [
-      {name:'Colazione', text:'Come nei giorni allenamento.'},
-      {name:'Pranzo', text:'120–130 g proteine + 50 g riso + verdure + 10 g olio EVO.'},
-      {name:'Spuntino', text:'Yogurt greco o albume pronto + 10–15 g frutta secca.'},
-      {name:'Cena', text:'Proteine + verdure. Carboidrati più bassi ma senza tagliare troppo.'}
-    ]
-  }
-];
+function allFields(){
+  return Array.from(document.querySelectorAll('input[type="number"], input[type="text"], input[type="checkbox"], textarea, select'));
+}
 
-const workoutData = [
-  {
-    name:'Giorno 1 – Glutei Forza',
-    goal:'Spinta principale sui glutei con carichi seri ma controllati.',
-    exercises:[
-      {name:'Hip Thrust', target:'5 x 8', notes:'Pausa di 1 secondo in massima contrazione.'},
-      {name:'Squat', target:'4 x 6–8', notes:'Controllo in discesa.'},
-      {name:'Affondi', target:'3 x 10', notes:'Focalizzati su stabilità e gluteo.'},
-      {name:'Leg Press', target:'3 x 12', notes:'Piedi leggermente alti se senti meglio il gluteo.'},
-      {name:'Abduzioni', target:'3 x 15 + drop set', notes:'Chiudi forte e non correre.'}
-    ]
-  },
-  {
-    name:'Giorno 2 – Upper + Core',
-    goal:'Parte alta completa senza stressare troppo il recupero.',
-    exercises:[
-      {name:'Lat Machine', target:'4 x 10', notes:'Scapole basse e movimento pulito.'},
-      {name:'Rematore', target:'3 x 10', notes:'Controlla il ritorno.'},
-      {name:'Chest Press', target:'3 x 10', notes:'Spinta pulita, senza forzare eccessivamente.'},
-      {name:'Alzate Laterali', target:'4 x 15', notes:'Leggere e precise.'},
-      {name:'Curl Bicipiti', target:'3 x 12', notes:'No slanci.'},
-      {name:'Tricipiti', target:'3 x 12', notes:'Chiudi bene il movimento.'},
-      {name:'Addome', target:'10 minuti', notes:'Crunch, plank o circuito breve.'}
-    ]
-  },
-  {
-    name:'Giorno 3 – Glutei Pump',
-    goal:'Volume e pompaggio per forma e crescita dei glutei.',
-    exercises:[
-      {name:'Hip Thrust', target:'4 x 12', notes:'Meno carico, più controllo e bruciore.'},
-      {name:'Stacco Rumeno', target:'4 x 10', notes:'Stretch dietro, schiena ferma.'},
-      {name:'Bulgarian Squat', target:'3 x 10', notes:'Controlla il ginocchio e spingi col gluteo.'},
-      {name:'Kickback', target:'3 x 15', notes:'Picco di contrazione in alto.'},
-      {name:'Abduzioni', target:'3 x 20', notes:'Bruciore controllato.'},
-      {name:'Glute Bridge Isometrico', target:'3 x 30 sec', notes:'Stringi forte senza mollare.'}
-    ]
-  }
-];
+function saveField(el){
+  const key = STORAGE_PREFIX + el.id;
+  const value = el.type === 'checkbox' ? el.checked : el.value;
+  localStorage.setItem(key, JSON.stringify(value));
+}
 
-function defaultState(){
-  const workout = {};
-  workoutData.forEach((day, dIdx)=>{
-    workout[dIdx] = {};
-    day.exercises.forEach((ex, eIdx)=>{
-      const targetSets = parseTargetSets(ex.target);
-      workout[dIdx][eIdx] = Array.from({length: targetSets}, ()=>({weight:'', reps:'', note:'', done:false}));
-    });
+function loadFields(){
+  allFields().forEach(el=>{
+    const raw = localStorage.getItem(STORAGE_PREFIX + el.id);
+    if(raw !== null){
+      const value = JSON.parse(raw);
+      if(el.type === 'checkbox'){ el.checked = value; }
+      else { el.value = value; }
+    }
+    el.addEventListener('input', ()=>saveField(el));
+    el.addEventListener('change', ()=>saveField(el));
   });
-  return {
-    profile:{name:'', height:'156 cm', weight:'53 kg', notes:'Tendenza a ritenzione, focus tiroide/cortisolo, obiettivo glutei pieni e linea pulita.'},
-    workout,
-    activeDay:0,
-    history:[]
+}
+
+function openSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id === 'progress') drawProgress();
+  if(id === 'history') renderHistory();
+}
+
+function getExerciseAverage(prefixes){
+  let nums = [];
+  prefixes.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.value !== '') nums.push(parseFloat(el.value));
+  });
+  if(!nums.length) return null;
+  return +(nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1);
+}
+
+function buildSessionPayload(dayName){
+  const payload = { day: dayName, date: new Date().toLocaleString('it-IT'), exercises: [] };
+
+  const map = {
+    'Giorno 1': [
+      {name:'Hip Thrust', ids:['d1_hip_p1','d1_hip_p2','d1_hip_p3','d1_hip_p4','d1_hip_p5']},
+      {name:'Squat', ids:['d1_sq_p1','d1_sq_p2','d1_sq_p3','d1_sq_p4']},
+      {name:'Affondi', ids:['d1_af_p1','d1_af_p2','d1_af_p3']},
+      {name:'Leg Press', ids:['d1_lp_p1','d1_lp_p2','d1_lp_p3']},
+      {name:'Abduzioni', ids:['d1_ab_p1','d1_ab_p2','d1_ab_p3']}
+    ],
+    'Giorno 2': [
+      {name:'Lat Machine', ids:['d2_lat_p1','d2_lat_p2','d2_lat_p3','d2_lat_p4']},
+      {name:'Rematore', ids:['d2_re_p1','d2_re_p2','d2_re_p3']},
+      {name:'Chest Press', ids:['d2_cp_p1','d2_cp_p2','d2_cp_p3']},
+      {name:'Spalle Laterali', ids:['d2_sl_p1','d2_sl_p2','d2_sl_p3','d2_sl_p4']}
+    ],
+    'Giorno 3': [
+      {name:'Hip Thrust', ids:['d3_hip_p1','d3_hip_p2','d3_hip_p3','d3_hip_p4']},
+      {name:'Stacco Rumeno', ids:['d3_sr_p1','d3_sr_p2','d3_sr_p3','d3_sr_p4']},
+      {name:'Bulgarian Squat', ids:['d3_bs_p1','d3_bs_p2','d3_bs_p3']},
+      {name:'Kickback', ids:['d3_ki_p1','d3_ki_p2','d3_ki_p3']},
+      {name:'Abduzioni', ids:['d3_ab_p1','d3_ab_p2','d3_ab_p3']}
+    ]
   };
-}
 
-function parseTargetSets(target){
-  const m = String(target).match(/^(\d+)/);
-  return m ? Number(m[1]) : 3;
-}
-
-function loadState(){
-  try{
-    const raw = localStorage.getItem(appKey);
-    if(!raw) return defaultState();
-    const parsed = JSON.parse(raw);
-    const base = defaultState();
-    return mergeDeep(base, parsed);
-  }catch(e){
-    return defaultState();
-  }
-}
-
-function mergeDeep(base, extra){
-  if(Array.isArray(base) && Array.isArray(extra)) return extra;
-  if(typeof base === 'object' && base && typeof extra === 'object' && extra){
-    const out = {...base};
-    for(const k of Object.keys(extra)) out[k] = mergeDeep(base[k], extra[k]);
-    return out;
-  }
-  return extra === undefined ? base : extra;
-}
-
-let state = loadState();
-
-function saveState(){
-  state.profile.name = document.getElementById('profileName').value;
-  state.profile.height = document.getElementById('profileHeight').value;
-  state.profile.weight = document.getElementById('profileWeight').value;
-  state.profile.notes = document.getElementById('profileNotes').value;
-  localStorage.setItem(appKey, JSON.stringify(state));
-}
-
-function renderDiet(){
-  const c = document.getElementById('dietContainer');
-  c.innerHTML = '';
-  dietData.forEach(section=>{
-    const box = document.createElement('div');
-    box.className = 'meal';
-    box.innerHTML = `<h3>${section.title}</h3>` + section.meals.map(m=>`<p><strong>${m.name}:</strong> ${m.text}</p>`).join('');
-    c.appendChild(box);
-  });
-}
-
-function renderTabs(){
-  const tabs = document.getElementById('tabs');
-  tabs.innerHTML = '';
-  workoutData.forEach((day, idx)=>{
-    const b = document.createElement('button');
-    b.className = 'tab' + (state.activeDay===idx?' active':'');
-    b.textContent = day.name;
-    b.onclick = () => { state.activeDay = idx; saveState(); renderTabs(); renderDays(); };
-    tabs.appendChild(b);
-  });
-}
-
-function renderDays(){
-  const container = document.getElementById('days');
-  container.innerHTML = '';
-  workoutData.forEach((day, dIdx)=>{
-    const dayDiv = document.createElement('div');
-    dayDiv.className = 'day' + (state.activeDay===dIdx?' active':'');
-    dayDiv.innerHTML = `<p class="muted"><strong>Obiettivo:</strong> ${day.goal}</p>`;
-
-    day.exercises.forEach((ex, eIdx)=>{
-      const exDiv = document.createElement('div');
-      exDiv.className = 'exercise';
-      const rows = state.workout[dIdx][eIdx];
-      exDiv.innerHTML = `
-        <div class="exercise-head">
-          <div>
-            <strong>${ex.name}</strong><br>
-            <small>Target: ${ex.target}</small>
-          </div>
-          <small>${ex.notes}</small>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Serie</th>
-              <th>Peso</th>
-              <th>Rip. fatte</th>
-              <th>Note</th>
-              <th>Ok</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${rows.map((row, sIdx)=>`
-              <tr>
-                <td>${sIdx+1}</td>
-                <td><input data-type="weight" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.weight)}" placeholder="kg" /></td>
-                <td><input data-type="reps" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.reps)}" placeholder="rip" /></td>
-                <td><input data-type="note" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.note)}" placeholder="sensazioni" /></td>
-                <td><input type="checkbox" data-type="done" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" ${row.done?'checked':''} /></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-      dayDiv.appendChild(exDiv);
-    });
-    container.appendChild(dayDiv);
+  (map[dayName] || []).forEach(ex => {
+    const avg = getExerciseAverage(ex.ids);
+    payload.exercises.push({ name: ex.name, avgWeight: avg });
   });
 
-  document.querySelectorAll('#days input').forEach(inp=>{
-    inp.addEventListener('input', handleWorkoutInput);
-    inp.addEventListener('change', handleWorkoutInput);
-  });
+  return payload;
 }
 
-function escapeHtml(v){
-  return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-}
-
-function handleWorkoutInput(e){
-  const el = e.target;
-  const d = el.dataset.d, ex = el.dataset.e, s = el.dataset.s, type = el.dataset.type;
-  if(d===undefined) return;
-  if(type === 'done') state.workout[d][ex][s][type] = el.checked;
-  else state.workout[d][ex][s][type] = el.value;
-  saveState();
-}
-
-function renderProfile(){
-  document.getElementById('profileName').value = state.profile.name || '';
-  document.getElementById('profileHeight').value = state.profile.height || '';
-  document.getElementById('profileWeight').value = state.profile.weight || '';
-  document.getElementById('profileNotes').value = state.profile.notes || '';
+function saveSession(dayName){
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  const payload = buildSessionPayload(dayName);
+  history.unshift(payload);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  renderHistory();
+  drawProgress();
+  alert(dayName + ' salvato nello storico.');
 }
 
 function renderHistory(){
-  const c = document.getElementById('history');
-  c.innerHTML = '';
-  if(!state.history.length){
-    c.innerHTML = '<p class="muted">Nessuna progressione salvata ancora.</p>';
+  const box = document.getElementById('historyList');
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+
+  if(!history.length){
+    box.innerHTML = '<div class="history-item">Nessuna sessione salvata ancora.</div>';
     return;
   }
-  state.history.slice().reverse().forEach((item, idx)=>{
-    const div = document.createElement('div');
-    div.className = 'history-item';
-    div.innerHTML = `<strong>${item.date}</strong> — ${item.day}<br><small class="muted">${item.summary}</small>`;
-    c.appendChild(div);
-  });
+
+  box.innerHTML = history.map((item, idx) => {
+    const ex = item.exercises
+      .filter(e => e.avgWeight !== null)
+      .map(e => `<div>${e.name}: <strong>${e.avgWeight} kg</strong></div>`)
+      .join('') || '<div class="muted">Nessun carico inserito.</div>';
+
+    return `<div class="history-item">
+      <div><strong>${item.day}</strong> — ${item.date}</div>
+      <div style="margin-top:8px">${ex}</div>
+    </div>`;
+  }).join('');
 }
 
-function saveTodayToHistory(){
-  const dIdx = state.activeDay;
-  const day = workoutData[dIdx];
-  const parts = [];
-  day.exercises.forEach((ex, eIdx)=>{
-    const rows = state.workout[dIdx][eIdx];
-    const desc = rows.map((r,i)=>{
-      const a = [];
-      if(r.weight) a.push(r.weight + ' kg');
-      if(r.reps) a.push(r.reps + ' rip');
-      if(r.note) a.push(r.note);
-      return a.length ? `S${i+1}: ${a.join(' / ')}` : '';
-    }).filter(Boolean).join(' | ');
-    if(desc) parts.push(`${ex.name} → ${desc}`);
+function drawProgress(){
+  const canvas = document.getElementById('progressChart');
+  const ctx = canvas.getContext('2d');
+  const selected = document.getElementById('exerciseSelect').value;
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]').slice().reverse();
+
+  const series = history
+    .map(h => {
+      const found = (h.exercises || []).find(e => e.name === selected);
+      return { label: h.date.split(',')[0], value: found ? found.avgWeight : null };
+    })
+    .filter(x => x.value !== null);
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // bg
+  ctx.fillStyle = '#121722';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // no data
+  if(series.length === 0){
+    ctx.fillStyle = '#aeb7c9';
+    ctx.font = '18px Arial';
+    ctx.fillText('Salva almeno una sessione per vedere il grafico.', 30, 60);
+    document.getElementById('progressText').textContent = 'Nessun dato salvato ancora per ' + selected + '.';
+    return;
+  }
+
+  const padding = 45;
+  const w = canvas.width - padding*2;
+  const h = canvas.height - padding*2;
+  const values = series.map(s => s.value);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = Math.max(1, max - min);
+
+  // axes
+  ctx.strokeStyle = '#3a4255';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(padding, canvas.height-padding);
+  ctx.lineTo(canvas.width-padding, canvas.height-padding);
+  ctx.stroke();
+
+  // labels
+  ctx.fillStyle = '#aeb7c9';
+  ctx.font = '12px Arial';
+  ctx.fillText(max + ' kg', 8, padding+4);
+  ctx.fillText(min + ' kg', 8, canvas.height-padding);
+
+  // line
+  ctx.strokeStyle = '#d6b25e';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+
+  series.forEach((point, i) => {
+    const x = padding + (series.length === 1 ? w/2 : i*(w/(series.length-1)));
+    const y = canvas.height-padding - ((point.value-min)/range)*h;
+    if(i===0) ctx.moveTo(x,y);
+    else ctx.lineTo(x,y);
   });
-  state.history.push({
-    date: new Date().toLocaleString('it-IT'),
-    day: day.name,
-    summary: parts.length ? parts.join(' || ') : 'Allenamento salvato senza dettagli.'
+  ctx.stroke();
+
+  // points
+  series.forEach((point, i) => {
+    const x = padding + (series.length === 1 ? w/2 : i*(w/(series.length-1)));
+    const y = canvas.height-padding - ((point.value-min)/range)*h;
+    ctx.fillStyle = '#f1d58b';
+    ctx.beginPath();
+    ctx.arc(x,y,5,0,Math.PI*2);
+    ctx.fill();
+
+    ctx.fillStyle = '#dfe6f4';
+    ctx.font = '11px Arial';
+    ctx.fillText(point.value + 'kg', x-15, y-10);
+    ctx.fillText(point.label, x-18, canvas.height-padding+18);
   });
-  saveState();
-  renderHistory();
-  alert('Allenamento salvato nello storico.');
+
+  const first = series[0].value;
+  const last = series[series.length-1].value;
+  const diff = +(last - first).toFixed(1);
+  const trend = diff > 0 ? ('+' + diff + ' kg') : (diff < 0 ? (diff + ' kg') : '0 kg');
+  document.getElementById('progressText').textContent = selected + ': andamento totale ' + trend + '.';
 }
 
-function exportData(){
-  saveState();
-  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
+function exportBackup(){
+  const data = {};
+  Object.keys(localStorage).forEach(key=>{
+    if(key.startsWith(STORAGE_PREFIX)) data[key] = localStorage.getItem(key);
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'backup-scheda-locoselli.json';
+  a.href = URL.createObjectURL(blob);
+  a.download = 'locoselli-backup.json';
   a.click();
-  URL.revokeObjectURL(url);
 }
 
-function importData(file){
+function importBackup(event){
+  const file = event.target.files[0];
+  if(!file) return;
   const reader = new FileReader();
-  reader.onload = () => {
+  reader.onload = e => {
     try{
-      const parsed = JSON.parse(reader.result);
-      state = mergeDeep(defaultState(), parsed);
-      saveState();
-      init();
-      alert('Backup importato correttamente.');
-    }catch(e){
-      alert('File non valido.');
+      const data = JSON.parse(e.target.result);
+      Object.entries(data).forEach(([k,v]) => localStorage.setItem(k,v));
+      location.reload();
+    }catch(err){
+      alert('Backup non valido.');
     }
   };
   reader.readAsText(file);
 }
 
-function resetData(){
+function resetAllData(){
   if(!confirm('Vuoi davvero cancellare tutti i dati salvati?')) return;
-  state = defaultState();
-  saveState();
-  init();
+  Object.keys(localStorage).forEach(key=>{
+    if(key.startsWith(STORAGE_PREFIX)) localStorage.removeItem(key);
+  });
+  location.reload();
 }
 
-function init(){
-  renderProfile();
-  renderDiet();
-  renderTabs();
-  renderDays();
-  renderHistory();
-}
-
-document.getElementById('saveBtn').onclick = () => { saveState(); alert('Dati salvati.'); };
-document.getElementById('completeBtn').onclick = saveTodayToHistory;
-document.getElementById('exportBtn').onclick = exportData;
-document.getElementById('importBtn').onclick = () => document.getElementById('importFile').click();
-document.getElementById('importFile').addEventListener('change', e => { if(e.target.files[0]) importData(e.target.files[0]); });
-document.getElementById('resetBtn').onclick = resetData;
-['profileName','profileHeight','profileWeight','profileNotes'].forEach(id=>{
-  document.getElementById(id).addEventListener('input', saveState);
-});
-
-init();
+loadFields();
+renderHistory();
+drawProgress();
 </script>
 </body>
 </html>
