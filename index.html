@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scheda & Dieta - Locoselli</title>
+  <style>
+    :root{
+      --bg:#0f1115;
+      --card:#181c22;
+      --card2:#20262e;
+      --text:#f3f4f6;
+      --muted:#b7bec8;
+      --gold:#c8a96b;
+      --line:#2d3440;
+      --ok:#2d7d46;
+      --danger:#8f3d3d;
+      --input:#10151b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,#0b0d11,#151923 40%,#0f1115);
+      color:var(--text);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 40px}
+    .hero{
+      padding:18px;border:1px solid var(--line);border-radius:22px;
+      background:linear-gradient(145deg,rgba(200,169,107,.14),rgba(255,255,255,.02));
+      box-shadow:0 12px 40px rgba(0,0,0,.25);
+    }
+    h1,h2,h3{margin:0 0 10px}
+    h1{font-size:28px;letter-spacing:.4px}
+    h2{font-size:20px;color:var(--gold);margin-top:8px}
+    h3{font-size:16px;color:var(--gold)}
+    p{margin:8px 0;line-height:1.45}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:14px;margin-top:14px}
+    .grid.two{grid-template-columns:1.2fr .8fr}
+    @media (max-width: 860px){.grid.two{grid-template-columns:1fr}}
+    .card{
+      background:rgba(24,28,34,.96);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+    }
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#262d38;color:var(--gold);font-size:12px;margin:4px 6px 0 0;border:1px solid #3b4554}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+    .tab{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--text);cursor:pointer}
+    .tab.active{background:rgba(200,169,107,.12);color:var(--gold);border-color:rgba(200,169,107,.4)}
+    .day{display:none}
+    .day.active{display:block}
+    .exercise{padding:12px;border:1px solid var(--line);border-radius:16px;background:#161b21;margin-bottom:12px}
+    .exercise-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
+    .exercise small{color:var(--muted)}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:8px 6px;border-bottom:1px solid #29303a;text-align:left;vertical-align:middle}
+    th{color:var(--muted);font-weight:600}
+    input, textarea, select{
+      width:100%;padding:10px 11px;border-radius:10px;border:1px solid #323a46;
+      background:var(--input);color:var(--text);outline:none;
+    }
+    input[type="checkbox"]{width:auto;transform:scale(1.1)}
+    textarea{min-height:90px;resize:vertical}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    button{
+      padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+      background:var(--card2);color:var(--text);cursor:pointer;font-weight:600;
+    }
+    button.primary{background:rgba(200,169,107,.14);color:var(--gold);border-color:rgba(200,169,107,.4)}
+    button.good{background:rgba(45,125,70,.18);border-color:rgba(45,125,70,.4)}
+    button.warn{background:rgba(143,61,61,.16);border-color:rgba(143,61,61,.4)}
+    .note{
+      border-left:4px solid var(--gold);padding:10px 12px;background:rgba(200,169,107,.08);
+      border-radius:10px;margin-top:10px;color:#f6e9d1
+    }
+    .meal{padding:12px;border:1px solid var(--line);border-radius:16px;background:#161b21;margin-bottom:12px}
+    .history-item{padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:#151a20}
+    .small{font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Scheda & Dieta Personalizzata</h1>
+      <p class="muted">Programma pensato per aumentare massa magra in modo pulito, con focus glutei, controllo della ritenzione e gestione dello stress metabolico.</p>
+      <span class="pill">Glutei focus</span>
+      <span class="pill">3 giorni</span>
+      <span class="pill">Salvataggio automatico</span>
+      <span class="pill">Peso + ripetizioni</span>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Messaggio importante</h2>
+        <div class="note">
+          <strong>Non devi mangiare di meno.</strong> Devi mangiare in modo più intelligente per aiutare tiroide, cortisolo, recupero e ritenzione. Mangiare troppo poco può peggiorare gonfiore, fame, stanchezza e blocco del fisico.
+        </div>
+        <p><strong>Tiroide:</strong> se la terapia non è ancora ben stabile, il corpo può trattenere liquidi e sembrare più "coperto" anche senza vero aumento di grasso.</p>
+        <p><strong>Cortisolo:</strong> troppo stress, troppo cardio, dieta troppo rigida o allenamenti troppo lunghi possono aumentare il cortisolo e peggiorare la ritenzione.</p>
+        <p><strong>Obiettivo:</strong> glutei più pieni, linea femminile più bella, fisico pulito e meno acqua sottocutanea.</p>
+      </div>
+
+      <div class="card">
+        <h2>Profilo</h2>
+        <label>Nome</label>
+        <input id="profileName" placeholder="Es. Martina" />
+        <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:10px;">
+          <div>
+            <label>Altezza</label>
+            <input id="profileHeight" placeholder="156 cm" />
+          </div>
+          <div>
+            <label>Peso</label>
+            <input id="profileWeight" placeholder="53 kg" />
+          </div>
+        </div>
+        <label style="margin-top:10px;display:block;">Note</label>
+        <textarea id="profileNotes" placeholder="Tiroide, ritenzione, stress, sensazioni..."></textarea>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Dieta</h2>
+        <div id="dietContainer"></div>
+      </div>
+
+      <div class="card">
+        <h2>Supporto & regole</h2>
+        <p><strong>Acqua:</strong> 2.5–3 litri al giorno.</p>
+        <p><strong>Cardio:</strong> 2–3 volte a settimana, 20 minuti di camminata leggera/inclinata.</p>
+        <p><strong>Da limitare:</strong> cibi molto lavorati, eccesso di sale nascosto, tonno in scatola frequente, digiuni lunghi.</p>
+        <p><strong>Focus:</strong> costanza, recupero, sonno, progressione graduale dei carichi.</p>
+        <p><strong>Integratori già usati:</strong> selenio, vitamina D, bromelina, omega 3, magnesio, potassio.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h2>Allenamento</h2>
+      <div class="tabs" id="tabs"></div>
+      <div id="days"></div>
+      <div class="btns">
+        <button class="primary" id="saveBtn">Salva tutto</button>
+        <button class="good" id="completeBtn">Salva allenamento di oggi nello storico</button>
+        <button id="exportBtn">Esporta backup</button>
+        <button id="importBtn">Importa backup</button>
+        <button class="warn" id="resetBtn">Reset dati</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none" />
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <h2>Storico progressioni</h2>
+      <p class="muted small">Ogni volta che finisce l'allenamento puoi salvarlo qui con data, pesi e ripetizioni usate.</p>
+      <div id="history"></div>
+    </div>
+  </div>
+
+<script>
+const appKey = 'locoselli_compagna_app_v1';
+
+const dietData = [
+  {
+    title: 'Giorni allenamento',
+    meals: [
+      {name:'Colazione', text:'150 g albume + 60 g avena + 10 g burro di mandorle. Facoltativi frutti rossi.'},
+      {name:'Pranzo', text:'120–130 g pollo / tacchino / pesce + 80 g riso basmati crudo + verdure + 10 g olio EVO.'},
+      {name:'Spuntino', text:'Yogurt greco oppure prodotto a base di albume + 15 g frutta secca.'},
+      {name:'Cena', text:'120 g pesce o carne magra + verdure + 200 g patate oppure 60 g riso + 10 g olio EVO.'}
+    ]
+  },
+  {
+    title: 'Giorni off',
+    meals: [
+      {name:'Colazione', text:'Come nei giorni allenamento.'},
+      {name:'Pranzo', text:'120–130 g proteine + 50 g riso + verdure + 10 g olio EVO.'},
+      {name:'Spuntino', text:'Yogurt greco o albume pronto + 10–15 g frutta secca.'},
+      {name:'Cena', text:'Proteine + verdure. Carboidrati più bassi ma senza tagliare troppo.'}
+    ]
+  }
+];
+
+const workoutData = [
+  {
+    name:'Giorno 1 – Glutei Forza',
+    goal:'Spinta principale sui glutei con carichi seri ma controllati.',
+    exercises:[
+      {name:'Hip Thrust', target:'5 x 8', notes:'Pausa di 1 secondo in massima contrazione.'},
+      {name:'Squat', target:'4 x 6–8', notes:'Controllo in discesa.'},
+      {name:'Affondi', target:'3 x 10', notes:'Focalizzati su stabilità e gluteo.'},
+      {name:'Leg Press', target:'3 x 12', notes:'Piedi leggermente alti se senti meglio il gluteo.'},
+      {name:'Abduzioni', target:'3 x 15 + drop set', notes:'Chiudi forte e non correre.'}
+    ]
+  },
+  {
+    name:'Giorno 2 – Upper + Core',
+    goal:'Parte alta completa senza stressare troppo il recupero.',
+    exercises:[
+      {name:'Lat Machine', target:'4 x 10', notes:'Scapole basse e movimento pulito.'},
+      {name:'Rematore', target:'3 x 10', notes:'Controlla il ritorno.'},
+      {name:'Chest Press', target:'3 x 10', notes:'Spinta pulita, senza forzare eccessivamente.'},
+      {name:'Alzate Laterali', target:'4 x 15', notes:'Leggere e precise.'},
+      {name:'Curl Bicipiti', target:'3 x 12', notes:'No slanci.'},
+      {name:'Tricipiti', target:'3 x 12', notes:'Chiudi bene il movimento.'},
+      {name:'Addome', target:'10 minuti', notes:'Crunch, plank o circuito breve.'}
+    ]
+  },
+  {
+    name:'Giorno 3 – Glutei Pump',
+    goal:'Volume e pompaggio per forma e crescita dei glutei.',
+    exercises:[
+      {name:'Hip Thrust', target:'4 x 12', notes:'Meno carico, più controllo e bruciore.'},
+      {name:'Stacco Rumeno', target:'4 x 10', notes:'Stretch dietro, schiena ferma.'},
+      {name:'Bulgarian Squat', target:'3 x 10', notes:'Controlla il ginocchio e spingi col gluteo.'},
+      {name:'Kickback', target:'3 x 15', notes:'Picco di contrazione in alto.'},
+      {name:'Abduzioni', target:'3 x 20', notes:'Bruciore controllato.'},
+      {name:'Glute Bridge Isometrico', target:'3 x 30 sec', notes:'Stringi forte senza mollare.'}
+    ]
+  }
+];
+
+function defaultState(){
+  const workout = {};
+  workoutData.forEach((day, dIdx)=>{
+    workout[dIdx] = {};
+    day.exercises.forEach((ex, eIdx)=>{
+      const targetSets = parseTargetSets(ex.target);
+      workout[dIdx][eIdx] = Array.from({length: targetSets}, ()=>({weight:'', reps:'', note:'', done:false}));
+    });
+  });
+  return {
+    profile:{name:'', height:'156 cm', weight:'53 kg', notes:'Tendenza a ritenzione, focus tiroide/cortisolo, obiettivo glutei pieni e linea pulita.'},
+    workout,
+    activeDay:0,
+    history:[]
+  };
+}
+
+function parseTargetSets(target){
+  const m = String(target).match(/^(\d+)/);
+  return m ? Number(m[1]) : 3;
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(appKey);
+    if(!raw) return defaultState();
+    const parsed = JSON.parse(raw);
+    const base = defaultState();
+    return mergeDeep(base, parsed);
+  }catch(e){
+    return defaultState();
+  }
+}
+
+function mergeDeep(base, extra){
+  if(Array.isArray(base) && Array.isArray(extra)) return extra;
+  if(typeof base === 'object' && base && typeof extra === 'object' && extra){
+    const out = {...base};
+    for(const k of Object.keys(extra)) out[k] = mergeDeep(base[k], extra[k]);
+    return out;
+  }
+  return extra === undefined ? base : extra;
+}
+
+let state = loadState();
+
+function saveState(){
+  state.profile.name = document.getElementById('profileName').value;
+  state.profile.height = document.getElementById('profileHeight').value;
+  state.profile.weight = document.getElementById('profileWeight').value;
+  state.profile.notes = document.getElementById('profileNotes').value;
+  localStorage.setItem(appKey, JSON.stringify(state));
+}
+
+function renderDiet(){
+  const c = document.getElementById('dietContainer');
+  c.innerHTML = '';
+  dietData.forEach(section=>{
+    const box = document.createElement('div');
+    box.className = 'meal';
+    box.innerHTML = `<h3>${section.title}</h3>` + section.meals.map(m=>`<p><strong>${m.name}:</strong> ${m.text}</p>`).join('');
+    c.appendChild(box);
+  });
+}
+
+function renderTabs(){
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = '';
+  workoutData.forEach((day, idx)=>{
+    const b = document.createElement('button');
+    b.className = 'tab' + (state.activeDay===idx?' active':'');
+    b.textContent = day.name;
+    b.onclick = () => { state.activeDay = idx; saveState(); renderTabs(); renderDays(); };
+    tabs.appendChild(b);
+  });
+}
+
+function renderDays(){
+  const container = document.getElementById('days');
+  container.innerHTML = '';
+  workoutData.forEach((day, dIdx)=>{
+    const dayDiv = document.createElement('div');
+    dayDiv.className = 'day' + (state.activeDay===dIdx?' active':'');
+    dayDiv.innerHTML = `<p class="muted"><strong>Obiettivo:</strong> ${day.goal}</p>`;
+
+    day.exercises.forEach((ex, eIdx)=>{
+      const exDiv = document.createElement('div');
+      exDiv.className = 'exercise';
+      const rows = state.workout[dIdx][eIdx];
+      exDiv.innerHTML = `
+        <div class="exercise-head">
+          <div>
+            <strong>${ex.name}</strong><br>
+            <small>Target: ${ex.target}</small>
+          </div>
+          <small>${ex.notes}</small>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Serie</th>
+              <th>Peso</th>
+              <th>Rip. fatte</th>
+              <th>Note</th>
+              <th>Ok</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows.map((row, sIdx)=>`
+              <tr>
+                <td>${sIdx+1}</td>
+                <td><input data-type="weight" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.weight)}" placeholder="kg" /></td>
+                <td><input data-type="reps" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.reps)}" placeholder="rip" /></td>
+                <td><input data-type="note" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" value="${escapeHtml(row.note)}" placeholder="sensazioni" /></td>
+                <td><input type="checkbox" data-type="done" data-d="${dIdx}" data-e="${eIdx}" data-s="${sIdx}" ${row.done?'checked':''} /></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      dayDiv.appendChild(exDiv);
+    });
+    container.appendChild(dayDiv);
+  });
+
+  document.querySelectorAll('#days input').forEach(inp=>{
+    inp.addEventListener('input', handleWorkoutInput);
+    inp.addEventListener('change', handleWorkoutInput);
+  });
+}
+
+function escapeHtml(v){
+  return String(v ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+}
+
+function handleWorkoutInput(e){
+  const el = e.target;
+  const d = el.dataset.d, ex = el.dataset.e, s = el.dataset.s, type = el.dataset.type;
+  if(d===undefined) return;
+  if(type === 'done') state.workout[d][ex][s][type] = el.checked;
+  else state.workout[d][ex][s][type] = el.value;
+  saveState();
+}
+
+function renderProfile(){
+  document.getElementById('profileName').value = state.profile.name || '';
+  document.getElementById('profileHeight').value = state.profile.height || '';
+  document.getElementById('profileWeight').value = state.profile.weight || '';
+  document.getElementById('profileNotes').value = state.profile.notes || '';
+}
+
+function renderHistory(){
+  const c = document.getElementById('history');
+  c.innerHTML = '';
+  if(!state.history.length){
+    c.innerHTML = '<p class="muted">Nessuna progressione salvata ancora.</p>';
+    return;
+  }
+  state.history.slice().reverse().forEach((item, idx)=>{
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML = `<strong>${item.date}</strong> — ${item.day}<br><small class="muted">${item.summary}</small>`;
+    c.appendChild(div);
+  });
+}
+
+function saveTodayToHistory(){
+  const dIdx = state.activeDay;
+  const day = workoutData[dIdx];
+  const parts = [];
+  day.exercises.forEach((ex, eIdx)=>{
+    const rows = state.workout[dIdx][eIdx];
+    const desc = rows.map((r,i)=>{
+      const a = [];
+      if(r.weight) a.push(r.weight + ' kg');
+      if(r.reps) a.push(r.reps + ' rip');
+      if(r.note) a.push(r.note);
+      return a.length ? `S${i+1}: ${a.join(' / ')}` : '';
+    }).filter(Boolean).join(' | ');
+    if(desc) parts.push(`${ex.name} → ${desc}`);
+  });
+  state.history.push({
+    date: new Date().toLocaleString('it-IT'),
+    day: day.name,
+    summary: parts.length ? parts.join(' || ') : 'Allenamento salvato senza dettagli.'
+  });
+  saveState();
+  renderHistory();
+  alert('Allenamento salvato nello storico.');
+}
+
+function exportData(){
+  saveState();
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'backup-scheda-locoselli.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData(file){
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const parsed = JSON.parse(reader.result);
+      state = mergeDeep(defaultState(), parsed);
+      saveState();
+      init();
+      alert('Backup importato correttamente.');
+    }catch(e){
+      alert('File non valido.');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetData(){
+  if(!confirm('Vuoi davvero cancellare tutti i dati salvati?')) return;
+  state = defaultState();
+  saveState();
+  init();
+}
+
+function init(){
+  renderProfile();
+  renderDiet();
+  renderTabs();
+  renderDays();
+  renderHistory();
+}
+
+document.getElementById('saveBtn').onclick = () => { saveState(); alert('Dati salvati.'); };
+document.getElementById('completeBtn').onclick = saveTodayToHistory;
+document.getElementById('exportBtn').onclick = exportData;
+document.getElementById('importBtn').onclick = () => document.getElementById('importFile').click();
+document.getElementById('importFile').addEventListener('change', e => { if(e.target.files[0]) importData(e.target.files[0]); });
+document.getElementById('resetBtn').onclick = resetData;
+['profileName','profileHeight','profileWeight','profileNotes'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', saveState);
+});
+
+init();
+</script>
+</body>
+</html>
