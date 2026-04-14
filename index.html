@@ -9,54 +9,113 @@
 <link rel="apple-touch-icon" href="logo-apple.png">
 
 <style>
-body{font-family:Arial;margin:0;background:#0f0f0f;color:white;text-align:center}
-button{width:90%;padding:15px;margin:10px;border-radius:10px;border:none;background:gold;font-weight:bold}
+body{margin:0;font-family:Arial;background:#0f0f0f;color:white;text-align:center}
+header{padding:20px}
+.logo{width:90px}
+button{width:90%;padding:15px;margin:10px;border-radius:12px;border:none;background:gold;font-weight:bold}
 .section{display:none;padding:20px}
-.exercise{background:#1c1c1c;margin:10px;padding:10px;border-radius:10px}
-input{width:60px;margin:5px;text-align:center}
+.exercise{background:#1c1c1c;margin:10px;padding:15px;border-radius:12px}
+h2{margin-top:0}
+input{width:60px;padding:6px;margin:5px;border-radius:6px;border:none;text-align:center}
 </style>
 </head>
 
 <body>
 
-<h1>Locoselli Training</h1>
+<header>
+<img src="logo.PNG" class="logo">
+<h1>Programma Completo</h1>
+</header>
 
-<button onclick="show('d1')">Giorno 1</button>
-<button onclick="show('d2')">Giorno 2</button>
-<button onclick="show('d3')">Giorno 3</button>
-<button onclick="show('diet')">Dieta</button>
+<button onclick="openPage('d1')">Giorno 1 🍑 PUSH + GAMBE</button>
+<button onclick="openPage('d2')">Giorno 2 💪 PULL + GAMBE</button>
+<button onclick="openPage('d3')">Giorno 3 🍑 GAMBE + SPALLE</button>
+<button onclick="openPage('diet')">Dieta 🥗</button>
 
 <div id="d1" class="section">
 <h2>Push + Glutei</h2>
-<div class="exercise">Hip Thrust <input id="a1"><input id="a2"></div>
-<div class="exercise">Bulgarian <input id="a3"><input id="a4"></div>
-<div class="exercise">Chest Press <input id="a5"><input id="a6"></div>
+
+<div class="exercise">Hip Thrust 5x6-8<br>
+Peso <input id="d1_1p"> Rep <input id="d1_1r"></div>
+
+<div class="exercise">Bulgarian Squat 3x8<br>
+Peso <input id="d1_2p"> Rep <input id="d1_2r"></div>
+
+<div class="exercise">Leg Curl 3x10<br>
+Peso <input id="d1_3p"> Rep <input id="d1_3r"></div>
+
+<div class="exercise">Chest Press 3x10<br>
+Peso <input id="d1_4p"> Rep <input id="d1_4r"></div>
+
+<div class="exercise">Spinte Spalle 3x10<br>
+Peso <input id="d1_5p"> Rep <input id="d1_5r"></div>
+
+<div class="exercise">Tricipiti 3x12<br>
+Peso <input id="d1_6p"> Rep <input id="d1_6r"></div>
+
 </div>
 
 <div id="d2" class="section">
 <h2>Pull + Glutei</h2>
-<div class="exercise">Hip Thrust <input id="b1"><input id="b2"></div>
-<div class="exercise">Leg Press <input id="b3"><input id="b4"></div>
-<div class="exercise">Lat Machine <input id="b5"><input id="b6"></div>
+
+<div class="exercise">Hip Thrust 4x10-12<br>
+Peso <input id="d2_1p"> Rep <input id="d2_1r"></div>
+
+<div class="exercise">Leg Press 4x12<br>
+Peso <input id="d2_2p"> Rep <input id="d2_2r"></div>
+
+<div class="exercise">Abduzioni 3x20<br>
+Peso <input id="d2_3p"> Rep <input id="d2_3r"></div>
+
+<div class="exercise">Lat Machine 4x10<br>
+Peso <input id="d2_4p"> Rep <input id="d2_4r"></div>
+
+<div class="exercise">Rematore 3x10<br>
+Peso <input id="d2_5p"> Rep <input id="d2_5r"></div>
+
+<div class="exercise">Bicipiti 3x12<br>
+Peso <input id="d2_6p"> Rep <input id="d2_6r"></div>
+
 </div>
 
 <div id="d3" class="section">
 <h2>Gambe + Spalle</h2>
-<div class="exercise">Stacco <input id="c1"><input id="c2"></div>
-<div class="exercise">Affondi <input id="c3"><input id="c4"></div>
-<div class="exercise">Spalle <input id="c5"><input id="c6"></div>
+
+<div class="exercise">Stacco Rumeno 4x10<br>
+Peso <input id="d3_1p"> Rep <input id="d3_1r"></div>
+
+<div class="exercise">Affondi 3x12<br>
+Peso <input id="d3_2p"> Rep <input id="d3_2r"></div>
+
+<div class="exercise">Leg Extension 3x12<br>
+Peso <input id="d3_3p"> Rep <input id="d3_3r"></div>
+
+<div class="exercise">Abduzioni 3x20<br>
+Peso <input id="d3_4p"> Rep <input id="d3_4r"></div>
+
+<div class="exercise">Spalle 3x10<br>
+Peso <input id="d3_5p"> Rep <input id="d3_5r"></div>
+
+<div class="exercise">Alzate Laterali 4x15<br>
+Peso <input id="d3_6p"> Rep <input id="d3_6r"></div>
+
 </div>
 
 <div id="diet" class="section">
 <h2>Dieta</h2>
-<p><b>NON mangiare di meno</b></p>
-<p>Colazione: albume + avena<br>
+
+<p><b>NON devi mangiare di meno</b></p>
+
+<p>
+Colazione: albume + avena<br>
 Pranzo: pollo + riso<br>
-Cena: pesce + patate</p>
+Cena: pesce + patate
+</p>
+
 </div>
 
 <script>
-function show(id){
+function openPage(id){
  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
  document.getElementById(id).style.display='block';
 }
