@@ -76,6 +76,39 @@
       background:linear-gradient(180deg,var(--card),var(--card2));
       border:1px solid var(--line);border-radius:16px;padding:12px;margin-bottom:10px
     }
+    .request-card{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);border-radius:16px;padding:14px
+    }
+    .request-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px
+    }
+    .field-label{
+      margin:0 0 6px;font-size:13px;color:var(--muted);font-weight:700
+    }
+    .full{grid-column:1/-1}
+    .timer-wrap{
+      background:linear-gradient(180deg,var(--card),var(--card2));
+      border:1px solid var(--line);border-radius:16px;padding:14px
+    }
+    .timer-display{
+      text-align:center;font-size:54px;line-height:1;font-weight:800;color:var(--gold2);
+      letter-spacing:1px;margin:8px 0 2px
+    }
+    .timer-label{
+      text-align:center;color:var(--muted);font-size:13px
+    }
+    .inline-timer{
+      border:1px dashed rgba(215,178,93,.45);border-radius:14px;padding:10px;margin:10px 0;
+      background:rgba(18,23,34,.72)
+    }
+    .inline-timer-head{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px
+    }
+    .inline-timer-title{font-size:13px;color:var(--muted);font-weight:800}
+    .inline-timer-time{font-size:24px;color:var(--gold2);font-weight:900}
+    .inline-timer-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .signature{color:var(--gold2);font-size:13px;font-weight:900;margin-top:6px}
     .exercise h3,.diet-card h3{margin:0 0 6px;font-size:18px}
     .meta{color:var(--gold2);font-size:13px;margin-bottom:8px;font-weight:700}
     .series{
@@ -109,6 +142,7 @@
       .series .noteField{grid-column:1/4}
       .series .check{grid-column:3/4}
       h1{font-size:24px}
+      .request-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -120,6 +154,7 @@
         <div>
           <h1>Rosaria Titone</h1>
           <div class="sub">Schede complete + dieta + progressi + storico + backup. Versione stabile e ottimizzata mobile.</div>
+          <div class="signature">2107 🦖 🫛</div>
         </div>
       </div>
       <div class="status" id="statusBox">Pronto.</div>
@@ -130,6 +165,8 @@
         <button class="btn" onclick="openSection('diet')">Dieta</button>
         <button class="btn" onclick="openSection('progress')">Progressi</button>
         <button class="btn" onclick="openSection('history')">Storico</button>
+        <button class="btn" onclick="openSection('newPlan')">Nuovo piano</button>
+        <button class="btn" onclick="openSection('breakTimer')">Timer pausa</button>
       </div>
     </div>
 
@@ -189,6 +226,63 @@
       </div>
     </section>
 
+    <section id="newPlan" class="section">
+      <h2 class="title">Richiedi Nuovo Piano</h2>
+      <p class="desc">Compila i dati e apri la mail gia pronta da inviare.</p>
+      <div class="request-card">
+        <div class="request-grid">
+          <div class="full">
+            <p class="field-label">Email destinatario</p>
+            <input id="plan_to_email" type="email" placeholder="es. coach@email.com">
+          </div>
+          <div>
+            <p class="field-label">Nome</p>
+            <input id="plan_client_name" type="text" placeholder="Es. Rosaria Titone">
+          </div>
+          <div>
+            <p class="field-label">Data richiesta</p>
+            <input id="plan_request_date" type="text" placeholder="Es. 17/05/2026">
+          </div>
+          <div>
+            <p class="field-label">Peso attuale (kg)</p>
+            <input id="plan_current_weight" type="text" inputmode="decimal" placeholder="Es. 68,4">
+          </div>
+          <div>
+            <p class="field-label">Peso obiettivo (kg)</p>
+            <input id="plan_target_weight" type="text" inputmode="decimal" placeholder="Es. 62,0">
+          </div>
+          <div class="full">
+            <p class="field-label">Note</p>
+            <textarea id="plan_notes" placeholder="Aggiungi note utili per il nuovo piano"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn" onclick="sendPlanRequestEmail()">Richiedi nuovo piano via Mail</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="breakTimer" class="section">
+      <h2 class="title">Timer Pausa Workout</h2>
+      <p class="desc">Imposta la pausa e gestiscila con un tocco.</p>
+      <div class="timer-wrap">
+        <div class="timer-display" id="timerDisplay">01:30</div>
+        <div class="timer-label" id="timerState">Pronto</div>
+        <div class="row">
+          <button class="btn-dark" onclick="setBreakPreset(60)">60s</button>
+          <button class="btn-dark" onclick="setBreakPreset(90)">90s</button>
+          <button class="btn-dark" onclick="setBreakPreset(120)">120s</button>
+          <input id="breakSecondsInput" type="number" min="10" max="900" step="5" placeholder="Secondi">
+          <button class="btn-dark" onclick="applyBreakSeconds()">Imposta</button>
+        </div>
+        <div class="row">
+          <button class="btn" onclick="startBreakTimer()">Start</button>
+          <button class="btn-dark" onclick="pauseBreakTimer()">Pausa</button>
+          <button class="btn-dark btn-red" onclick="resetBreakTimer()">Reset</button>
+        </div>
+      </div>
+    </section>
+
     <div class="footer">I dati restano sul dispositivo (local storage). File necessari in repo: <strong>index.html</strong>, <strong>logo.PNG</strong>, <strong>logo-apple.png</strong>.</div>
   </div>
 
@@ -196,6 +290,11 @@
 const STORAGE_PREFIX = 'rosaria_titone_app_';
 const HISTORY_KEY = STORAGE_PREFIX + 'history';
 const MAX_HISTORY_ITEMS = 250;
+const BREAK_TIMER_DEFAULT = 90;
+let breakTimerTotal = BREAK_TIMER_DEFAULT;
+let breakTimerRemaining = BREAK_TIMER_DEFAULT;
+let breakTimerInterval = null;
+let breakTimerRunning = false;
 
 const DAY_DATA = {
   day1: {
@@ -268,7 +367,7 @@ function setStatus(text, kind){
 }
 
 function allFields(){
-  return Array.from(document.querySelectorAll('input[type="number"],input[type="text"],input[type="checkbox"],textarea,select'));
+  return Array.from(document.querySelectorAll('input[type="number"],input[type="text"],input[type="email"],input[type="checkbox"],textarea,select'));
 }
 function saveField(el){
   if(!el || !el.id) return;
@@ -319,8 +418,22 @@ function exerciseHtml(ex){
       '<input class="noteField" type="text" id="' + n + '" placeholder="Note">' +
       '<div class="check"><input type="checkbox" id="' + c + '"></div>' +
     '</div>';
+    if(i < ex.sets) rows += inlineTimerHtml('Pausa prossima serie');
   }
   return '<div class="exercise"><h3>' + ex.name + '</h3><div class="meta">' + ex.meta + '</div>' + rows + '</div>';
+}
+
+function inlineTimerHtml(title){
+  const label = title || 'Pausa prossimo esercizio';
+  return '<div class="inline-timer">' +
+    '<div class="inline-timer-head"><span class="inline-timer-title">' + label + '</span><span class="inline-timer-time timerMirrorDisplay">01:30</span></div>' +
+    '<div class="timer-label timerMirrorState">Pronto</div>' +
+    '<div class="inline-timer-actions">' +
+      '<button class="btn-dark" onclick="startBreakTimer()">Start</button>' +
+      '<button class="btn-dark" onclick="pauseBreakTimer()">Pausa</button>' +
+      '<button class="btn-dark btn-red" onclick="resetBreakTimer()">Reset</button>' +
+    '</div>' +
+  '</div>';
 }
 
 function renderDay(dayId){
@@ -328,7 +441,10 @@ function renderDay(dayId){
   const root = document.getElementById(dayId);
   if(!day || !root) return;
   let html = '<h2 class="title">' + day.title + '</h2><p class="desc">' + day.desc + '</p>';
-  day.exercises.forEach(ex => { html += exerciseHtml(ex); });
+  day.exercises.forEach((ex, index) => {
+    html += exerciseHtml(ex);
+    if(index < day.exercises.length - 1) html += inlineTimerHtml('Pausa prossimo esercizio');
+  });
   html += '<div class="row"><button class="btn" onclick="saveSession(\'' + day.key + '\')">Salva ' + day.key + '</button></div>';
   root.innerHTML = html;
 }
@@ -532,6 +648,167 @@ function resetAllData(){
   setTimeout(() => location.reload(), 200);
 }
 
+function normalizeNumber(value){
+  if(value === null || value === undefined) return NaN;
+  const clean = String(value).trim().replace(',', '.');
+  const num = parseFloat(clean);
+  return Number.isFinite(num) ? num : NaN;
+}
+
+function sendPlanRequestEmail(){
+  const to = (document.getElementById('plan_to_email')?.value || '').trim();
+  const name = (document.getElementById('plan_client_name')?.value || '').trim();
+  const dateValue = (document.getElementById('plan_request_date')?.value || '').trim();
+  const currentRaw = document.getElementById('plan_current_weight')?.value || '';
+  const targetRaw = document.getElementById('plan_target_weight')?.value || '';
+  const notes = (document.getElementById('plan_notes')?.value || '').trim();
+
+  if(!to){
+    setStatus("Inserisci prima l'email destinatario", 'bad');
+    return;
+  }
+
+  const current = normalizeNumber(currentRaw);
+  const target = normalizeNumber(targetRaw);
+
+  if(!Number.isFinite(current) || !Number.isFinite(target)){
+    setStatus('Inserisci peso attuale e peso obiettivo validi', 'bad');
+    return;
+  }
+
+  const requestDate = dateValue || new Date().toLocaleDateString('it-IT');
+  const weightDiff = +(target - current).toFixed(1);
+  const subject = 'Richiesta nuovo piano - ' + (name || 'Cliente');
+  const bodyLines = [
+    'Ciao, richiedo un nuovo piano personalizzato.',
+    '',
+    'Nome: ' + (name || 'Non indicato'),
+    'Data richiesta: ' + requestDate,
+    'Peso attuale: ' + current.toFixed(1) + ' kg',
+    'Peso obiettivo: ' + target.toFixed(1) + ' kg',
+    'Delta: ' + (weightDiff > 0 ? '+' : '') + weightDiff.toFixed(1) + ' kg',
+    '',
+    'Note:',
+    notes || 'Nessuna nota aggiuntiva.'
+  ];
+
+  const mailto = 'mailto:' + encodeURIComponent(to) +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+  window.location.href = mailto;
+  setStatus('Mail pronta: controlla e invia.', 'ok');
+}
+
+function formatSeconds(total){
+  const safe = Math.max(0, Math.floor(total || 0));
+  const m = String(Math.floor(safe / 60)).padStart(2, '0');
+  const s = String(safe % 60).padStart(2, '0');
+  return m + ':' + s;
+}
+
+function updateBreakTimerUi(stateText){
+  const display = document.getElementById('timerDisplay');
+  const state = document.getElementById('timerState');
+  if(display) display.textContent = formatSeconds(breakTimerRemaining);
+  if(state) state.textContent = stateText || (breakTimerRunning ? 'In corso' : 'In pausa');
+  document.querySelectorAll('.timerMirrorDisplay').forEach(el => {
+    el.textContent = formatSeconds(breakTimerRemaining);
+  });
+  document.querySelectorAll('.timerMirrorState').forEach(el => {
+    el.textContent = stateText || (breakTimerRunning ? 'In corso' : 'In pausa');
+  });
+}
+
+function ringBreakTimer(){
+  try{
+    if(navigator.vibrate) navigator.vibrate([180, 120, 180]);
+  }catch(err){}
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 880;
+    gain.gain.value = 0.06;
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    setTimeout(() => {
+      osc.stop();
+      ctx.close();
+    }, 300);
+  }catch(err){}
+}
+
+function setBreakPreset(seconds){
+  const safe = Math.max(10, Math.min(900, parseInt(seconds, 10) || BREAK_TIMER_DEFAULT));
+  breakTimerTotal = safe;
+  breakTimerRemaining = safe;
+  if(breakTimerInterval){
+    clearInterval(breakTimerInterval);
+    breakTimerInterval = null;
+  }
+  breakTimerRunning = false;
+  updateBreakTimerUi('Preset impostato');
+}
+
+function applyBreakSeconds(){
+  const raw = document.getElementById('breakSecondsInput')?.value;
+  const value = parseInt(raw, 10);
+  if(!Number.isFinite(value)){
+    setStatus('Inserisci secondi validi per il timer', 'bad');
+    return;
+  }
+  setBreakPreset(value);
+  setStatus('Timer pausa aggiornato', 'ok');
+}
+
+function tickBreakTimer(){
+  breakTimerRemaining -= 1;
+  if(breakTimerRemaining <= 0){
+    breakTimerRemaining = 0;
+    breakTimerRunning = false;
+    if(breakTimerInterval){
+      clearInterval(breakTimerInterval);
+      breakTimerInterval = null;
+    }
+    updateBreakTimerUi('Pausa finita');
+    ringBreakTimer();
+    setStatus('Pausa finita, vai con la prossima serie', 'ok');
+    return;
+  }
+  updateBreakTimerUi('In corso');
+}
+
+function startBreakTimer(){
+  if(breakTimerRunning) return;
+  if(breakTimerRemaining <= 0) breakTimerRemaining = breakTimerTotal;
+  breakTimerRunning = true;
+  updateBreakTimerUi('In corso');
+  if(breakTimerInterval) clearInterval(breakTimerInterval);
+  breakTimerInterval = setInterval(tickBreakTimer, 1000);
+}
+
+function pauseBreakTimer(){
+  breakTimerRunning = false;
+  if(breakTimerInterval){
+    clearInterval(breakTimerInterval);
+    breakTimerInterval = null;
+  }
+  updateBreakTimerUi('In pausa');
+}
+
+function resetBreakTimer(){
+  breakTimerRunning = false;
+  if(breakTimerInterval){
+    clearInterval(breakTimerInterval);
+    breakTimerInterval = null;
+  }
+  breakTimerRemaining = breakTimerTotal;
+  updateBreakTimerUi('Pronto');
+}
+
 function boot(){
   renderDay('day1');
   renderDay('day2');
@@ -540,6 +817,7 @@ function boot(){
   loadFields();
   renderHistory();
   drawProgress();
+  updateBreakTimerUi('Pronto');
   setStatus('App pronta e stabile', 'ok');
 }
 
